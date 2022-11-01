@@ -23,11 +23,12 @@
 }
 
 .default:hover {
-  background: #24adc4;
+  background: #4ae1fd;
 }
 
 .default:active {
-  background: #298494;
+  background: #282c34;
+  color: #0dd7fa;
 }
 
 .button:disabled {
