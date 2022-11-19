@@ -1,8 +1,7 @@
 .counter {
-  margin: 0 auto;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 6fr 6fr;
-  grid-gap: 5em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 

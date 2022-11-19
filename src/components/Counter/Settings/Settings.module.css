@@ -2,17 +2,22 @@
   border: 1px solid #0dd7fa;
   border-radius: 10px;
   color: #0dd7fa;
-  height: fit-content;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 330px;
+  max-width: 436px;
 }
 
 .value {
   display: flex;
-  justify-content: space-between;
-  padding: 0.7em;
+  padding: 15px;
   flex-wrap: wrap;
   font-size: 30px;
   font-weight: bold;
   align-items: center;
+  justify-content: center;
 }
 
 .value input {
@@ -20,7 +25,8 @@
   border: 2px solid #0dd7fa;
   font-weight: bold;
   text-align: center;
-  padding: 0.6em;
+  padding: 10px;
+  margin: 0 0 0 20px;
 }
 
 .value input:focus {
@@ -30,7 +36,8 @@
 .default {
   border: 1px solid #0dd7fa;
   border-radius: 10px;
-  margin: 1em;
+  display: flex;
+  flex-direction: column;
 }
 
 .red {
@@ -46,6 +53,4 @@
   border: 2px solid #0dd7fa;
   height: 85px;
   align-items: center;
-  margin: 1.5em;
-  padding: 0 2em;
 }

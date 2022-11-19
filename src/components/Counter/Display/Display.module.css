@@ -2,16 +2,30 @@
   border: 1px solid #0dd7fa;
   border-radius: 10px;
   color: #0dd7fa;
-  height: fit-content;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 330px;
+  max-width: 436px;
+  width: 100%;
 }
 
 .default {
   font-size: 72px;
   font-weight: bold;
-  padding: 25px 0;
   border: 1px solid #0dd7fa;
   border-radius: 10px;
-  margin: 0.3em;
+  align-items: center;
+  height: 170px;
+  word-break: break-word;
+}
+
+.message {
+  font-size: 30px;
+  word-break: break-word;
+  padding: 5px;
+  display: flex;
 }
 
 .red {
@@ -21,11 +35,9 @@
 .buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 1.5em;
+  justify-content: space-evenly;
   border-radius: 10px;
   border: 2px solid #0dd7fa;
   height: 85px;
   align-items: center;
-  padding: 0 2em;
 }
