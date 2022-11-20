@@ -16,9 +16,11 @@
   font-weight: bold;
   border: 1px solid #0dd7fa;
   border-radius: 10px;
-  align-items: center;
   height: 170px;
   word-break: break-word;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .message {
@@ -26,6 +28,7 @@
   word-break: break-word;
   padding: 5px;
   display: flex;
+  justify-content: center;
 }
 
 .red {

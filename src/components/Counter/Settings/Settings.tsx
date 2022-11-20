@@ -1,26 +1,39 @@
 import React, {ChangeEvent} from 'react';
 import s from './Settings.module.css';
 import {Button} from '../../Button/Button';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from '../../../state/store';
+import {setCountAC, setErrorAC, setIsSetAC, setMaxValueAC, setStartValueAC} from '../../../state/counter-reducer';
 
-export type SettingsPropType = {
-  startValue: number
-  maxValue: number
-  error: boolean
-  isSet: boolean
-  setStartValueCallback: (value: number) => void
-  setMaxValueCallback: (value: number) => void
-  setValuesCallback: () => void
-}
+export const Settings = () => {
 
-export const Settings: React.FC<SettingsPropType> = ({
-                                                       startValue,
-                                                       maxValue,
-                                                       error,
-                                                       isSet,
-                                                       setStartValueCallback,
-                                                       setMaxValueCallback,
-                                                       setValuesCallback,
-                                                     }) => {
+  const startValue = useSelector<AppRootStateType, number>(state => state.counter.startValue);
+  const maxValue = useSelector<AppRootStateType, number>(state => state.counter.maxValue);
+  const isSet = useSelector<AppRootStateType, boolean>(state => state.counter.isSet);
+  const error = useSelector<AppRootStateType, boolean>(state => state.counter.error);
+
+  const dispatch = useDispatch();
+
+  const setStartValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = +e.currentTarget.value;
+    dispatch(setStartValueAC(value));
+    dispatch(setErrorAC(value < 0 || value >= maxValue));
+    dispatch(setIsSetAC(false));
+  };
+  const setMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = +e.currentTarget.value;
+    dispatch(setMaxValueAC(value));
+    dispatch(setErrorAC(value <= startValue));
+    dispatch(setIsSetAC(false));
+  };
+  const setValues = (startValue: number, maxValue: number) => {
+    dispatch(setStartValueAC(startValue));
+    dispatch(setMaxValueAC(maxValue));
+    dispatch(setErrorAC(false));
+    dispatch(setIsSetAC(true));
+    dispatch(setCountAC(startValue));
+  };
+
   const setBtn = <span>set</span>;
 
   const finalClassName = s.default
@@ -28,32 +41,21 @@ export const Settings: React.FC<SettingsPropType> = ({
       ? s.red
       : s.default);
 
-  const setMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setMaxValueCallback(+e.currentTarget.value);
-  };
-
-  const setStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setStartValueCallback(+e.currentTarget.value);
-  };
-
-  const setValuesHandler = () => {
-    setValuesCallback();
-  };
-
   return (
     <div className={s.settings}>
       <div className={s.default}>
         <div className={s.value}>
           <span>max value:</span>
-          <input className={finalClassName} onChange={setMaxValueHandler} type="number" value={maxValue}/>
+          <input className={finalClassName} onChange={setMaxValue} type="number" value={maxValue}/>
         </div>
         <div className={s.value}>
           <span>start value:</span>
-          <input className={finalClassName} onChange={setStartValueHandler} type="number" value={startValue}/>
+          <input className={finalClassName} onChange={setStartValue} type="number"
+                 value={startValue}/>
         </div>
       </div>
       <div className={s.buttons}>
-        <Button disabled={!isSet || error} callBack={setValuesHandler}>{setBtn}</Button>
+        <Button disabled={isSet || error} callBack={() => setValues(startValue, maxValue)}>{setBtn}</Button>
       </div>
     </div>
   );

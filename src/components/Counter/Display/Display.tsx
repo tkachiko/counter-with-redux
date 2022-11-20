@@ -1,30 +1,23 @@
 import React from 'react';
 import s from './Display.module.css';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from '../../../state/store';
+import {setCountAC} from '../../../state/counter-reducer';
 import {Button} from '../../Button/Button';
 
-export type DisplayPropType = {
-  count: number
-  startValue: number
-  maxValue: number
-  error: boolean
-  isSet: boolean
-  increment: () => void
-  reset: () => void
-}
+export const Display = () => {
+  const count = useSelector<AppRootStateType, number>(state => state.counter.count);
+  const startValue = useSelector<AppRootStateType, number>(state => state.counter.startValue);
+  const maxValue = useSelector<AppRootStateType, number>(state => state.counter.maxValue);
+  const isSet = useSelector<AppRootStateType, boolean>(state => state.counter.isSet);
+  const step = useSelector<AppRootStateType, number>(state => state.counter.step);
+  const error = useSelector<AppRootStateType, boolean>(state => state.counter.error);
 
-export const Display: React.FC<DisplayPropType> = ({
-                                                     count,
-                                                     startValue,
-                                                     maxValue,
-                                                     error,
-                                                     isSet,
-                                                     increment,
-                                                     reset,
-                                                   }) => {
+  const dispatch = useDispatch();
 
-  const isIncButtonDisabled = count === maxValue || isSet;
+  const isIncButtonDisabled = count === maxValue || !isSet;
 
-  const isDifferentValues = (startValue !== 0 || maxValue !== 5) && isSet;
+  const isDifferentValues = (startValue === 0 || startValue !== 0 || maxValue !== 5) && !isSet;
   const isIncorrectValue = startValue === maxValue || error;
 
   const incBtn = <span>inc</span>;
@@ -41,10 +34,10 @@ export const Display: React.FC<DisplayPropType> = ({
       : s.default);
 
   const incrementHandler = () => {
-    increment();
+    dispatch(setCountAC(count + step));
   };
   const resetHandler = () => {
-    reset();
+    dispatch(setCountAC(startValue));
   };
 
   return (
@@ -58,7 +51,7 @@ export const Display: React.FC<DisplayPropType> = ({
       }
       <div className={s.buttons}>
         <Button disabled={error ? error : isIncButtonDisabled} callBack={incrementHandler}>{incBtn}</Button>
-        <Button disabled={false} callBack={resetHandler}>{resBtn}</Button>
+        <Button disabled={!isSet} callBack={resetHandler}>{resBtn}</Button>
       </div>
     </div>
   );
