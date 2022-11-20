@@ -12,7 +12,7 @@ export type CounterStateType = {
   startValue: number
   maxValue: number
   step: number
-  error: null | string
+  error: boolean
   isSet: boolean
 }
 
@@ -21,8 +21,8 @@ const initialState: CounterStateType = {
   startValue: 0,
   maxValue: 5,
   step: 1,
-  error: null,
-  isSet: false
+  error: false,
+  isSet: false,
 };
 
 export const counterReducer = (state = initialState, action: ActionType) => {
@@ -58,7 +58,7 @@ export const counterReducer = (state = initialState, action: ActionType) => {
       };
     }
     default:
-      return state
+      return state;
   }
 };
 
@@ -87,7 +87,7 @@ export const setMaxValueAC = (maxValue: number) => {
 };
 
 type SetErrorACType = ReturnType<typeof setErrorAC>
-export const setErrorAC = (error: string) => {
+export const setErrorAC = (error: boolean) => {
   return {
     type: SET_ERROR,
     error

@@ -8,8 +8,8 @@ beforeEach(() => {
     startValue: 0,
     maxValue: 5,
     step: 1,
-    error: null,
-    isSet: false
+    error: false,
+    isSet: false,
   };
 });
 
@@ -35,10 +35,10 @@ test('max value should be set', () => {
 });
 
 test('error should be set', () => {
-  const action = setErrorAC('Please incert correct value');
+  const action = setErrorAC(true);
   const endState = counterReducer(startState, action);
 
-  expect(endState.error).toBe('Please incert correct value')
+  expect(endState.error).toBe(true)
 });
 
 test('isSet should be true', () => {
