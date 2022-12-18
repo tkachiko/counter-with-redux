@@ -2,8 +2,8 @@ import React, {ChangeEvent} from 'react';
 import s from './Settings.module.css';
 import {Button} from '../../Button/Button';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from '../../../state/store';
-import {setCountAC, setErrorAC, setIsSetAC, setMaxValueAC, setStartValueAC} from '../../../state/counter-reducer';
+import {AppRootStateType} from '../../../bll/store';
+import {setCountAC, setErrorAC, setIsSetAC, setMaxValueAC, setStartValueAC} from '../../../bll/counter-reducer';
 
 export const Settings = () => {
 

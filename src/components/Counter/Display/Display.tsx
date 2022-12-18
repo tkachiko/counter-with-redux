@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Display.module.css';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from '../../../state/store';
-import {setCountAC} from '../../../state/counter-reducer';
+import {AppRootStateType} from '../../../bll/store';
+import {setCountAC} from '../../../bll/counter-reducer';
 import {Button} from '../../Button/Button';
 
 export const Display = () => {
